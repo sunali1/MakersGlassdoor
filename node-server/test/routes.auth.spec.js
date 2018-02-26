@@ -7,27 +7,13 @@ chai.use(chaiHttp);
 
 const server = require('../app');
 const knex = require('../db/knex');
+const knexCleaner = require('./knex-cleaner');
 
 // describe 'API Routes'
 describe('routes : auth', () => {
 
-  // beforeEach(() => {
-  //   return knex.migrate.rollback()
-  //   .then(() => {return knex.migrate.latest()
-  //     .then(() => {
-  //       return knex.seed.run()
-  //       .then(() => {
-  //         done();
-  //       });
-  //      });
-  //     });
-  //   });
-  //
-  // afterEach(() => {
-  //   return knex.migrate.rollback()
-  //   .then(() => {
-  //     dome();
-  //   });
+  beforeEach(() => {
+         return knexCleaner.emptyDb()
   });
 
 describe('POST /auth/register', () => {
@@ -35,10 +21,10 @@ describe('POST /auth/register', () => {
     chai.request(server)
     .post('/auth/register')
     .send({
-      email: 'T2@t2.com',
+      email: 'T3@t3.com',
       name: 'test',
       password: 'test',
-      current_position: '2'
+      current_position: '3'
     })
     .end((err, res) => {
        console.log('RESPONSE IN TESTS', err);
@@ -51,3 +37,4 @@ describe('POST /auth/register', () => {
     });
   });
  });
+});
