@@ -20,6 +20,18 @@ describe('GET /users', () => {
     });
 });
 
+describe('GET /companies', function(){
+    it(' return 200', function(done){
+        chai.request(server)
+            .get('/companies')
+            .end(function(err,res){
+                res.should.have.status(200);
+                res.body[0].should.have.property('name');
+                done();
+        });
+    });
+});
+
 describe('GET /users/login', function(){
   it('should return all users', function(done) {
     chai.request(server)
@@ -29,7 +41,6 @@ describe('GET /users/login', function(){
     });
   });
 });
-
 
 // describe('POST/users/login', () => {
 //     it('should login the user', done => {
@@ -51,3 +62,4 @@ describe('GET /users/login', function(){
 //     });
 //     it('should not login the user with invalid credentials');
 // });
+

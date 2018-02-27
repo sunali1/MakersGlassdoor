@@ -11,8 +11,12 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 const authRoutes = require('./routes/auth');
 
-const app = express();
 
+var index = require('./routes/index');
+var users = require('./routes/users');
+var companies = require('./routes/companies');
+
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Register routes
 app.use('/', index);
 app.use('/users', users);
+app.use('/companies', companies);
 app.use('/auth', authRoutes);
 
 //set up middleware for client session
@@ -41,7 +46,7 @@ app.use('/auth', authRoutes);
 //         duration: 24 *60 * 60 *1000
 //     })
 // );
-//using passport session instead of cookie session to check if i can pass /post route TESTS
+//using passport session instead of cookie session
 app.use(session({
   secret: 'anything',
   resave: false,
@@ -50,6 +55,7 @@ app.use(session({
 //Passport is Express-compatible authentication middleware for Node.js.
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
