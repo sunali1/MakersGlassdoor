@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Layout.css'
-import Company from './Company';
-import Reviews from './Reviews';
+import Company from './../Company/Company';
+import Reviews from './../Reviews/Reviews';
 
 function Layout () {
   return(
